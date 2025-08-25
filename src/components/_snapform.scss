@@ -1,0 +1,133 @@
+@import '../styles/global.scss';
+.snapform {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+
+  .camera-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  video {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+
+  .capture-btn {
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.3rem;
+    width: 100%;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text);
+    background-color: var(--btn);
+  }
+
+  .tag-popup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+
+    .image-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 500px;
+
+      img {
+        width: 100%;
+        border-radius: 12px;
+      }
+
+      .tag-input-container {
+        position: absolute;
+        bottom: 16px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+
+        input {
+          width: 100%;
+          padding: 0.5rem 1rem;
+          border-radius: 8px;
+          outline: none;
+          border: none;
+          font-size: 1rem;
+          background: rgba(255, 255, 255, 0.95);
+
+          &:focus + label,
+          &:not(:placeholder-shown) + label {
+            top: -16px;
+            left: 8px;
+            font-size: 0.8rem;
+            padding: 0 4px;
+            color: var(--clr-prim-1);
+            outline: none;
+          }
+        }
+
+        label {
+          position: absolute;
+          top: 12px;
+          left: 12px;
+          font-size: 1rem;
+          color: #666;
+          pointer-events: none;
+          transition: 0.2s ease all;
+        }
+      }
+    }
+
+    .error {
+      color: red;
+      font-size: 0.9rem;
+    }
+
+    .actions {
+      display: flex;
+      gap: 1rem;
+
+      .btn {
+        padding: 0.6rem 1.2rem;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1rem;
+
+        &.save {
+          background: #28a745;
+          color: white;
+        }
+
+        &.cancel {
+          background: #dc3545;
+          color: white;
+        }
+      }
+    }
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    border: none;
+    background: transparent;
+    font-size: 1.5rem;
+    color: white;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,56 @@
+:root {
+  --clr-prim-0: hsl(42, 100%, 40%);
+  --clr-prim-1: hsl(42, 100%, 50%);
+  --clr-prim-2: hsl(42, 100%, 70%);
+  --clr-prim-3: hsl(42, 100%, 80%);
+  --clr-prim-4: hsl(42, 100%, 90%);
+
+  --fff: #fff;
+  --clr-light-1: hsl(0, 0%, 70%);
+  --clr-light-2: hsl(0, 0%, 77%);
+  --clr-light-3: hsl(0, 0%, 83%);
+  --clr-light-4: hsl(0, 0%, 88%);
+  --clr-light-5: hsl(0, 0%, 94%);
+
+  --danger: #ff0000;
+
+  --dark: #000;
+  --clr-dark-1: hsl(0, 0%, 7%);
+  --clr-dark-2: hsl(0, 0%, 12%);
+  --clr-dark-3: hsl(0, 0%, 17%);
+  --clr-dark-4: hsl(0, 0%, 27%);
+
+  ////// Color Scheme / Theme Mode
+  --bg: var(--fff);
+  --text: var(--clr-dark-4);
+  --cards: var(--clr-light-4);
+  --title: var(--clr-dark-2);
+  --btn: var(--clr-prim-1);
+  --icons: var(--clr-prim-1);
+
+  // Spacings
+  --br0: 0.5rem;
+  --br1: 1rem;
+  --br50: 50%;
+  --gap: 1.5rem;
+  --transition: 0.3s ease;
+  --max-width: 100%;
+
+  --pd-none: 0;
+  --pd-0: 0.5rem;
+  --pd-1: 1rem;
+  --pd-2: 2rem;
+}
+
+.dark-mode {
+  --bg: var(--clr-dark-1);
+  --btnBg: var(--clr-prim-1);
+  --btnText: var(--clr-dark-3);
+  --darkText: var(--clr-dark-3);
+  --cards: var(--clr-dark-4);
+  --cardsLight: var(--clr-light-4);
+  --text: var(--fff);
+  --ascent: var(--clr-prim-1);
+  --bdLite: var(--clr-prim-3);
+  --icons: var(--clr-prim-3);
+}
