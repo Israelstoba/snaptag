@@ -4,31 +4,36 @@ import './_snapform.scss';
 const SnapForm = ({ onSave, onClose, existingTags = [] }) => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
-  const inputRef = useRef(null); // 👈 ref for tag input
+  const inputRef = useRef(null);
   const [captured, setCaptured] = useState(null);
   const [tag, setTag] = useState('');
   const [error, setError] = useState('');
+  const [stream, setStream] = useState(null);
+  const [facingMode, setFacingMode] = useState('environment'); // rear cam default
 
   useEffect(() => {
     startCamera();
     return () => stopCamera();
-  }, []);
+  }, [facingMode]);
 
-  const startCamera = () => {
-    navigator.mediaDevices
-      .getUserMedia({ video: true })
-      .then((stream) => {
-        if (videoRef.current) {
-          videoRef.current.srcObject = stream;
-        }
-      })
-      .catch((err) => console.error('Camera error:', err));
+  const startCamera = async () => {
+    try {
+      stopCamera();
+      const newStream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode },
+      });
+      setStream(newStream);
+      if (videoRef.current) {
+        videoRef.current.srcObject = newStream;
+      }
+    } catch (err) {
+      console.error('Camera error:', err);
+    }
   };
 
   const stopCamera = () => {
-    if (videoRef.current && videoRef.current.srcObject) {
-      videoRef.current.srcObject.getTracks().forEach((track) => track.stop());
-      videoRef.current.srcObject = null;
+    if (stream) {
+      stream.getTracks().forEach((track) => track.stop());
     }
   };
 
@@ -45,7 +50,6 @@ const SnapForm = ({ onSave, onClose, existingTags = [] }) => {
     setCaptured(canvas.toDataURL('image/png'));
     stopCamera();
 
-    // 👇 wait for render, then auto-focus input
     setTimeout(() => {
       inputRef.current?.focus();
     }, 100);
@@ -82,11 +86,20 @@ const SnapForm = ({ onSave, onClose, existingTags = [] }) => {
     startCamera();
   };
 
+  const toggleCamera = () => {
+    setFacingMode((prev) => (prev === 'user' ? 'environment' : 'user'));
+  };
+
   return (
     <div className="snapform">
       {!captured ? (
         <div className="camera-container">
-          <video ref={videoRef} autoPlay playsInline />
+          <div className="video-wrapper">
+            <video ref={videoRef} autoPlay playsInline />
+            <button onClick={toggleCamera} className="switch-btn">
+              🔄
+            </button>
+          </div>
           <button onClick={takeShot} className="capture-btn">
             Capture
           </button>
@@ -97,7 +110,7 @@ const SnapForm = ({ onSave, onClose, existingTags = [] }) => {
             <img src={captured} alt="preview" />
             <div className="tag-input-container">
               <input
-                ref={inputRef} // 👈 attach ref here
+                ref={inputRef}
                 type="text"
                 placeholder=" "
                 value={tag}
