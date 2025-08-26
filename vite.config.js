@@ -16,7 +16,7 @@ export default defineConfig({
       manifest: {
         name: 'SnapTag',
         short_name: 'SnapTag',
-        description: '📸 Tag and manage your snaps offline',
+        description: 'Offline snap & tag app for FlashVault events',
         theme_color: '#ffffff',
         background_color: '#ffffff',
         display: 'standalone',
