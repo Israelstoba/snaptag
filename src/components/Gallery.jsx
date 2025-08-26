@@ -1,3 +1,5 @@
+import GalleryItem from './GalleryItem';
+
 const Gallery = ({ images }) => {
   return (
     <div className="gallery">
@@ -5,10 +7,7 @@ const Gallery = ({ images }) => {
         <p className="empty">No snaps yet. Tap + to add one!</p>
       ) : (
         images.map((img, index) => (
-          <div className="gallery-item" key={index}>
-            <img src={img.url} alt={img.tag} />
-            <p>{img.tag}</p>
-          </div>
+          <GalleryItem key={index} attendee={{ image: img.url, id: img.tag }} />
         ))
       )}
     </div>
